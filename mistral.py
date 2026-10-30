@@ -76,18 +76,21 @@ class Mistral:
             {"type": "image_url", "image_url": image_url(path)},
         ])
         return {
-            "title": str(result.get("title")),
-            "author": str(result.get("author")),
+            "title": str(result.get("title") or ""),
+            "author": str(result.get("author") or ""),
         }
 
-    def ocr(self, path):
+    def ocr(self, path, pages=None):
         path = Path(path)
         if path.suffix.lower() == ".pdf":
             encoded = base64.b64encode(path.read_bytes()).decode('ascii')
             document = {"type": "document_url", "document_url": f"data:application/pdf;base64,{encoded}"}
         else:
             document = {"type": "image_url", "image_url": image_url(path)}
-        result = self.post("ocr", {"model": "mistral-ocr-latest", "document": document})
+        request = {"model": "mistral-ocr-latest", "document": document}
+        if pages is not None:
+            request["pages"] = pages
+        result = self.post("ocr", request)
         pages = result.get("pages")
         if not isinstance(pages, list):
             raise MistralError("unexpected OCR response.")
