@@ -1,0 +1,3 @@
+def fetchbook():
+
+    return [["Dog man",4.1,"book_frontcover\\DOGMAN.webp"],["The Bad Guy",4.2,"book_frontcover\\The bad guy.webp"],["Your Space In The Universe",4.35,"book_frontcover\\Your space in the univesre.jpg"],["The Story of a Mars Rover",4.8,"book_frontcover\\Curiosity.webp"],["ABCs of racing:First Guide to Formula 1",4.83,"book_frontcover\\ABC.webp"],["Grand Prix: An Illustrated History of Formula 1",4.3,"book_frontcover\\History.webp"]]
